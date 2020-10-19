@@ -21,25 +21,44 @@ $stat = json_decode($statistics);
 		<div id="login">
 			<h1>Game</h1>
 		<div id="statistics">
-			<span>gold: </span><span id="gold"><?= $stat->gold?></span>
-			<span>wood: </span><span id="wood"><?= $stat->wood?></span>
+			<span>food: </span><span id="food"><?= $stat->food ?></span>
+			<span>gold: </span><span id="gold"><?= $stat->gold ?></span>
+			<span>wood: </span><span id="wood"><?= $stat->wood ?></span>
 			<span>knowlege: </span><span id="knowlege"><?= $stat->knowlege ?></span>
 			<span>population: </span><span id="population">0</span>
 		</div>
 		<div id="map">
 		</div>
+
 	<div class="dropdown">
-  	<button onclick="build(10)" class="btn" name="build">построить</button>
+  		<button onclick="build_options()" class="dropbtn" name="build" id="hut_btn">построить</button>
+  		<div id="buildDropdown" class="dropdown-content">
+    	<a href="#" onclick="build(10)">хижина</a>
+    	<a href="#" onclick="build(10)">fadfa</a>
+		</div>
+  	</div>
+
+  	<button onclick="build(10)" class="btn" name="hunting" id="do_hunt">охота</button>
+	</div> стройка:
+  <progress id = "build_progress" class="progress" value="0" max="10" ></progress>
+  добыча:
+  <progress id = "build_progress" class="progress"  value="0" max="10" ></progress>
 	</div>
-  <progress id = "build_progress" value="0" max="10" ></progress>
-	</div>
-</div>
+	
+	
 
 
 
 <script type="text/javascript">
 
+function build_options() {
+  document.getElementById("buildDropdown").classList.toggle("show");
+}
+
 let gold = document.getElementById("gold").innerHTML;
+if (gold <50) {
+	document.getElementById("hut_btn").style.background='#000000';
+}
 //document.getElementById("gold").innerHTML = gold;
 let building_progress = 0;
 var intervalID;
@@ -48,6 +67,9 @@ function build(build_time) {
   //document.getElementById("attribDropdown").classList.toggle("show");
   //let beer = 0;
   gold -=50;
+  if (gold <50) { //if not enough gold change button color to gray
+	document.getElementById("hut_btn").style.background='#b0c4de';
+}
   document.getElementById("gold").innerHTML = gold;
   let d1 = new Date();
   let d1ms = d1.getTime();
@@ -66,6 +88,21 @@ function myCallback() {
 	} 
 	document.getElementById("build_progress").value = building_progress;
 	
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }    
+  }
+  
 }
 
 </script>
