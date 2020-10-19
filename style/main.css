@@ -1,0 +1,64 @@
+.btn {
+  background-color: #1498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.main {
+  margin: 80px auto 0;
+	}
+
+	.overall {
+  margin: 5px auto 0;
+  border: 1px dashed #777;
+	}
+
+.container {
+	padding: 10px 16px 10px 10px;
+	font-weight: 400;
+	overflow: hidden;
+	width: 500px;
+	height: auto;
+	background: #ffc;
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+	box-shadow: 0 1px 3px rgba(0,0,0,.13);
+	}
+
+	#login {
+  	width: 450px;
+	margin: auto;
+	padding-bottom: 5px;
+	}
+
+	.container h1 {
+	color: #777;
+	text-align: center;
+	font-weight: 300;
+   border: 1px dashed #777;
+   margin-top: 5px;
+	}
+
+	#statistics {
+	color: #777;
+	text-align: center;
+	font-weight: 300;
+   border: 1px dashed #777;
+   margin-top: 5px;
+   padding-bottom: 5px;
+   margin-bottom: 5px;
+	}
+
+	#map {
+		height: 200px;
+	color: #777;
+	text-align: center;
+	font-weight: 300;
+   border: 1px dashed #777;
+   margin-top: 5px;
+   padding-bottom: 5px;
+   margin-bottom: 5px;
+	}
