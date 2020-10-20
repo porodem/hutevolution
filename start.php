@@ -9,12 +9,17 @@
 <body>
 
 <?php
+require_once 'building.php';
+
 //get saved statistics of player (gold, wood, etc.)
-$filename = 'save/mygame.json';
+$filename = 'save/mygame.json'; //file where statistics about prev game is saved
 $handle = fopen($filename,'r');
 $statistics = fread($handle, filesize($filename));
 //print_r($statistics);
 $stat = json_decode($statistics);
+$buildings = [];
+//get buildings classes
+$hut = new Building('хижина');
 ?>
 
 	<div class="container overall">
@@ -26,6 +31,7 @@ $stat = json_decode($statistics);
 			<span>wood: </span><span id="wood"><?= $stat->wood ?></span>
 			<span>knowlege: </span><span id="knowlege"><?= $stat->knowlege ?></span>
 			<span>population: </span><span id="population">0</span>
+			<span>вместимость: </span><span id="capacity">0</span>
 		</div>
 		<div id="map">
 		</div>
@@ -33,8 +39,8 @@ $stat = json_decode($statistics);
 	<div class="dropdown">
   		<button onclick="build_options()" class="dropbtn" name="build" id="hut_btn">построить</button>
   		<div id="buildDropdown" class="dropdown-content">
-    	<a href="#" onclick="build(10)">хижина</a>
-    	<a href="#" onclick="build(10)">fadfa</a>
+    	<a href="#" onclick="alertBuild(<?= $hut->time_build . ', \'' . $hut->name . '\'' ?>)"><?= $hut->name ?></a>
+    	<a href="#" onclick="alertBuild(30,'garden')">огород</a>
 		</div>
   	</div>
 
@@ -61,9 +67,11 @@ if (gold <50) {
 }
 //document.getElementById("gold").innerHTML = gold;
 let building_progress = 0;
+let build_time = 0;
 var intervalID;
   	
-function build(build_time) {
+//1s version of build by click
+function build() {
   //document.getElementById("attribDropdown").classList.toggle("show");
   //let beer = 0;
   gold -=50;
@@ -80,7 +88,7 @@ function build(build_time) {
 }
 
 function myCallback() {
-	building_progress++;
+	building_progress += (10 / build_time);
 	console.log(building_progress);
 	if(building_progress > 10) {
 		building_progress = 0; //if building complete set progress bar to zero.
@@ -88,6 +96,16 @@ function myCallback() {
 	} 
 	document.getElementById("build_progress").value = building_progress;
 	
+}
+
+function alertBuild(time, building_name) {
+	let isConfirmed = confirm('Простейшее жилище\r\nлес 5 | силы 10 | знания 1 | вместимость 5\r\nПостроить хижину?');
+	build_time = time;
+	if(isConfirmed) {
+		build();
+	} else {
+		//nothing
+	}
 }
 
 // Close the dropdown menu if the user clicks outside of it
